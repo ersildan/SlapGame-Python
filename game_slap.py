@@ -141,7 +141,7 @@ def game():
             print(Fore.LIGHTWHITE_EX + f'   ПОБЕДИЛ: ИИ')
             break
         if computer_h < 0:
-            print(Fore.LIGHTWHITE_EX + '   Бой окончен!')
+            print(Fore.LIGHTWHITE_EX + '   Бой окончен! Поздравляем!')
             print(Fore.LIGHTWHITE_EX + f'   ПОБЕДИЛ: {name_player}')
             print(Fore.LIGHTCYAN_EX + f'   Бодрые аплодисменты от автора игры!')
             break
