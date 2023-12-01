@@ -1,5 +1,4 @@
-import random
-import time
+import random, time
 from colorama import *
 
 init(autoreset=True)
