@@ -158,3 +158,7 @@ while True:
         exit()
     else:
         print(game())
+
+
+
+'console game'
