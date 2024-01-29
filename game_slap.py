@@ -1,7 +1,7 @@
 import random, time
 from colorama import *
 
-#some try to play this =)
+
 init(autoreset=True)
 
 
@@ -158,7 +158,3 @@ while True:
         exit()
     else:
         print(game())
-
-
-
-'console game'
