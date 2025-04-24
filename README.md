@@ -1,5 +1,5 @@
-A game against the computer. 
-You need to do more damage to win. 
-The game is played on the command line.
+A game against the computer. <br>
+You need to do more damage to win. <br>
+The game is played on the command line. <br>
 Good luck!
 
