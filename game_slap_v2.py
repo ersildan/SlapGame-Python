@@ -3,17 +3,24 @@ import random
 
 class Unit:
 
-    def __init__(self, name='Юнит', hp=5):
+    def __init__(self, name='Юнит', hp=10):
         self.name = name
         self.hp = hp
+        self.abilities = {
+            'heal_used': False, 
+            'bubble_used': False
+        }
 
+    
     def take_damage(self, damage):
         self.hp -= damage
         return self.hp
 
+
     def is_alive(self):
         return self.hp > 0
     
+
     def get_status(self):
         return f"{self.name}: {self.hp} здоровья"
 
@@ -21,16 +28,37 @@ class Unit:
 class GameLogic:
 
     @staticmethod
-    def human_choose_attack():
-        return input('Атака ==> [A] или [D] ').upper()
+    def roll_dice(sides=20):
+        """Бросок кубика 1-20"""
+
+        return random.randint(1, sides)
     
+
+    @staticmethod
+    def human_choose_attack():
+        """Выбор действия с валидацией"""
+
+        valid_keys = ['A', 'D', 'E', 'Q']
+        
+        while True:
+            print("A - атака слева | D - атака справа")
+            print("E - аптечка | Q - пузырь паладина")
+            choice = input('Выберите действие: ').upper()
+            
+            if choice in valid_keys:
+                return choice
+            else:
+                print(f"Используй только => {', '.join(valid_keys)}!")
+
     @staticmethod
     def human_choose_defense():
         return input('Защита ==> [A] или [D] ').upper()
     
+
     @staticmethod
     def computer_choose():
         return random.choice(['A', 'D'])
+    
     
     @staticmethod
     def check_hit(attack_side, defense_side):
