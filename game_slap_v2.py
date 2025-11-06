@@ -38,22 +38,43 @@ class GameLogic:
     def human_choose_attack():
         """Выбор действия с валидацией"""
 
-        valid_keys = ['A', 'D', 'E', 'Q']
+        valid_keys = ['A', 'D', 'E', 'Q', ' ']
         
         while True:
             print("A - атака слева | D - атака справа")
-            print("E - аптечка | Q - пузырь паладина")
+            print("E - аптечка | Q - бабл паладина")
             choice = input('Выберите действие: ').upper()
             
-            if choice in valid_keys:
-                return choice
+            if not choice:
+                return None
+            
+            elif choice[0] in valid_keys:
+                return choice[0]
+                   
             else:
                 print(f"Используй только => {', '.join(valid_keys)}!")
 
     @staticmethod
     def human_choose_defense():
-        return input('Защита ==> [A] или [D] ').upper()
-    
+        """Выбор защиты с валидацией"""
+        
+        valid_keys = ['A', 'D']
+        
+        while True:
+            raw_input = input('Защита ==> [A] или [D] ').upper()
+            
+            # Проверяем пустой ввод
+            if not raw_input:
+                return None
+            
+            # Берем первый символ
+            choice = raw_input[0]
+            
+            if choice in valid_keys:
+                return choice
+            else:
+                print(f"Используй только => {', '.join(valid_keys)}!")
+        
 
     @staticmethod
     def computer_choose():
@@ -65,5 +86,6 @@ class GameLogic:
         return attack_side != defense_side
     
     
-computer = Unit("S5")
+computer = Unit("Хекс")
 player = Unit()
+
