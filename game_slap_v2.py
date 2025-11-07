@@ -48,8 +48,10 @@ class GameLogic:
             if not choice:
                 return None
             
-            elif choice[0] in valid_keys:
-                return choice[0]
+            choice = choice[0]
+            
+            if choice in valid_keys:
+                return choice
                    
             else:
                 print(f"Используй только => {', '.join(valid_keys)}!")
@@ -62,12 +64,10 @@ class GameLogic:
         
         while True:
             raw_input = input('Защита ==> [A] или [D] ').upper()
-            
-            # Проверяем пустой ввод
+
             if not raw_input:
                 return None
             
-            # Берем первый символ
             choice = raw_input[0]
             
             if choice in valid_keys:
