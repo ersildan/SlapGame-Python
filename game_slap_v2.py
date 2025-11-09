@@ -1,5 +1,5 @@
 import random
-import os 
+#import os 
 
 
 class Unit:
@@ -34,7 +34,7 @@ class GameLogic:
         valid_keys = ['A', 'D']
         
         while True:
-            print("A - атака слева | D - атака справа")
+            print("атака слева - [ A ] или [ D ] - атака справа")
             choice = input('Выберите действие: ').upper()
             
             if not choice:
@@ -46,7 +46,7 @@ class GameLogic:
                 return choice
                    
             else:
-                print(f"Используй только => {', '.join(valid_keys)}!")
+                print(f"\nИспользуй только [ A ] или [ D ]!")
 
     @staticmethod
     def human_choose_defense():
@@ -56,7 +56,7 @@ class GameLogic:
         q_flag = False
         
         while True:
-            raw_input = input('Защита ==> [A] или [D] или [Q]: \n').upper()
+            raw_input = input('Юнит, защищайся!\n[ A ] - защита слева, [ D ] - защита справа\nБабл Паладина - [ Q ] если не использовал: \n').upper()
 
             if not raw_input:
                 return None
@@ -68,11 +68,10 @@ class GameLogic:
                     print("ЭЙ! Q уже использован в этом ходу! \nВыбери A или D для защиты!")
                     continue
                     
-                print("Бросок 🎲 на бабл Паладина!")
+                print("Бросок кубика на бабл Паладина!")
         
                 while True:
-                    user_input = input("Нажмите [space] для броска.\n" \
-                                       "Сложность [15]: ")
+                    user_input = input("Нажмите [space] для броска. Сложность [15]: ")
                     
                     if user_input == " ":
                         break
@@ -110,8 +109,8 @@ class GameController:
         self.computer = Unit("Хекс")
         self.player = Unit()
 
-    def clear_console(self):
-        os.system('cls' if os.name == 'nt' else 'clear') # чистка консоли
+    #def clear_console(self):
+    #    os.system('cls' if os.name == 'nt' else 'clear') # чистка консоли
     
     def game_loop(self):
         """Фаза 1: Определение инициативы"""
@@ -129,7 +128,7 @@ class GameController:
         player_roll = GameLogic.roll_dice()
         computer_roll = GameLogic.roll_dice()
             
-        print(f"Твой бросок: {player_roll} vs ИИ: {computer_roll}")
+        print(f"Твой бросок: {player_roll} vs Хекса: {computer_roll}")
         
         if player_roll >= computer_roll:
             print("Юнит атакует первым!")
@@ -168,24 +167,26 @@ class GameController:
     def player_attack_phase(self):
         """Атака Юнита - Хекс защищается"""
 
-        self.clear_console()
+        #self.clear_console()
         action1 = GameLogic.human_choose_attack()
         action2 = GameLogic.computer_choose()
 
         n = GameLogic.roll_dice()
 
-        print("Хекс бросает 🎲 на бабл паладина")
-        print(f"Проверка на активацию {{Сложность [15]}}, выпало: {n}")
+        print("Хекс бросает кубик на бабл паладина")
+        print(f"Проверка на активацию Сложность <15>, выпало: {n}")
 
         if n > 15:
             print("Хекс активирует бабл паладина и не получает урон!")
             return True
         else:
             if GameLogic.check_hit(action1, action2):
+                print('Хекс не использует бабл и делает выбор на защиту...')
                 print('Юнит наносит 3 очка урона, точно в цель!')
                 self.computer.take_damage(3)
             else:
-                print('Хекс защищает нужную сторону и получает всего 1 урон!')
+                print('Хекс не использует бабл и делает выбор на защиту...')
+                print('И он защищает нужную сторону и получает всего 1 урон!')
                 self.computer.take_damage(1)
             
             print(self.computer.get_status())
@@ -198,7 +199,7 @@ class GameController:
     def computer_attack_phase(self):
         """Атака Хекса - Юнит защищается"""
         
-        self.clear_console()
+        #self.clear_console()
         computer_attack = GameLogic.computer_choose()
         player_defense = GameLogic.human_choose_defense()
         
