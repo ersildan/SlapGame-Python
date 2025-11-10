@@ -1,5 +1,11 @@
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+
 import random
-#import os 
+# import os 
+
+console = Console()
 
 
 class Unit:
@@ -108,6 +114,7 @@ class GameController:
     def __init__(self):
         self.computer = Unit("Хекс")
         self.player = Unit()
+        self.console = Console()
 
     #def clear_console(self):
     #    os.system('cls' if os.name == 'nt' else 'clear') # чистка консоли
@@ -142,7 +149,7 @@ class GameController:
 
         round_number = 1
         while self.player.is_alive() and self.computer.is_alive():
-            print(f"\n=== РАУНД {round_number} ===")
+            self.console.print(Panel(f"\n=== РАУНД {round_number} ===", style="bold green"))
 
             self.player_attack_phase()
 
